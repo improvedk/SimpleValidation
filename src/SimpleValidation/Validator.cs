@@ -17,6 +17,14 @@ namespace SimpleValidation
 
 	public static class ValidatorExtensions
 	{
+		public static Validator<T> InclusiveBetween<T>(this Validator<T> validator, IComparable<T> lower, IComparable<T> upper) where T : IComparable<T>
+		{
+			if (lower.CompareTo(validator.Value) > 0 || upper.CompareTo(validator.Value) < 0)
+				throw new ValidationException("Parameter '" + validator.Name + "' must be between " + lower + " and " + upper + ".");
+
+			return validator;
+		}
+
 		public static Validator<T> Must<T>(this Validator<T> validator, Func<T, bool> test, string errorMessage)
 		{
 			if (!test(validator.Value))

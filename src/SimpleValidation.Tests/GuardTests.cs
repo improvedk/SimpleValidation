@@ -57,5 +57,17 @@ namespace SimpleValidation.Tests
 
 			Assert.Throws<ValidationException>(() => Guard.Check("x", "param").Must(x => x.Length == 2, "Errro"));
 		}
+
+		[Test]
+		public void InclusiveBetween()
+		{
+			Assert.DoesNotThrow(() => Guard.Check(5, "param").InclusiveBetween(4, 6));
+			Assert.DoesNotThrow(() => Guard.Check(5, "param").InclusiveBetween(5, 6));
+			Assert.DoesNotThrow(() => Guard.Check(5, "param").InclusiveBetween(4, 5));
+			Assert.DoesNotThrow(() => Guard.Check(5, "param").InclusiveBetween(5, 5));
+
+			Assert.Throws<ValidationException>(() => Guard.Check(5, "param").InclusiveBetween(6, 7));
+			Assert.Throws<ValidationException>(() => Guard.Check(5, "param").InclusiveBetween(3, 4));
+		}
 	}
 }
