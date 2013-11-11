@@ -19,14 +19,14 @@ namespace SimpleValidation.Tests
 		}
 
 		[Test]
-		public void LengthBetween()
+		public void LengthInclusiveBetween()
 		{
-			Assert.DoesNotThrow(() => Guard.Check("test", "param").LengthBetween(2, 6));
-			Assert.DoesNotThrow(() => Guard.Check("test", "param").LengthBetween(4, 4));
+			Assert.DoesNotThrow(() => Guard.Check("test", "param").LengthInclusiveBetween(2, 6));
+			Assert.DoesNotThrow(() => Guard.Check("test", "param").LengthInclusiveBetween(4, 4));
 
-			Assert.Throws<ValidationException>(() => Guard.Check("test", "param").LengthBetween(5, 6));
-			Assert.Throws<ValidationException>(() => Guard.Check("test", "param").LengthBetween(1, 2));
-			Assert.Throws<ValidationException>(() => Guard.Check("test", "param").LengthBetween(3, 3));
+			Assert.Throws<ValidationException>(() => Guard.Check("test", "param").LengthInclusiveBetween(5, 6));
+			Assert.Throws<ValidationException>(() => Guard.Check("test", "param").LengthInclusiveBetween(1, 2));
+			Assert.Throws<ValidationException>(() => Guard.Check("test", "param").LengthInclusiveBetween(3, 3));
 		}
 
 		[Test]

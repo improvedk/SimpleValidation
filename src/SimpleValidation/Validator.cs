@@ -49,7 +49,7 @@ namespace SimpleValidation
 			return validator;
 		}
 
-		public static Validator<string> LengthBetween(this Validator<string> validator, int lower, int upper)
+		public static Validator<string> LengthInclusiveBetween(this Validator<string> validator, int lower, int upper)
 		{
 			if (validator.Value.Length < lower || validator.Value.Length > upper)
 				throw new ValidationException("Parameter '" + validator.Name + "' must be between " + lower + " and " + upper + " characters long.");
