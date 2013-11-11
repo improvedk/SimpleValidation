@@ -16,6 +16,14 @@ namespace SimpleValidation
 
 	public static class ValidatorExtensions
 	{
+		public static Validator<int> Positive(this Validator<int> validator)
+		{
+			if (validator.Value <= 0)
+				throw new ValidationException("Parameter '" + validator.Name + "' must be a positive integer.");
+
+			return validator;
+		}
+
 		public static Validator<T> NotNull<T>(this Validator<T> validator)
 		{
 			if (validator.Value == null)
