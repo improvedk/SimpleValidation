@@ -49,5 +49,13 @@ namespace SimpleValidation.Tests
 			Assert.Throws<ValidationException>(() => Guard.Check(0, "param").Positive());
 			Assert.Throws<ValidationException>(() => Guard.Check(-5, "param").Positive());
 		}
+
+		[Test]
+		public void Must()
+		{
+			Assert.DoesNotThrow(() => Guard.Check("x", "param").Must(x => x.Length == 1, "No error"));
+
+			Assert.Throws<ValidationException>(() => Guard.Check("x", "param").Must(x => x.Length == 2, "Errro"));
+		}
 	}
 }

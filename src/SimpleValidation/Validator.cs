@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SimpleValidation
 {
@@ -16,6 +17,14 @@ namespace SimpleValidation
 
 	public static class ValidatorExtensions
 	{
+		public static Validator<T> Must<T>(this Validator<T> validator, Func<T, bool> test, string errorMessage)
+		{
+			if (!test(validator.Value))
+				throw new ValidationException(errorMessage);
+
+			return validator;
+		}
+
 		public static Validator<int> Positive(this Validator<int> validator)
 		{
 			if (validator.Value <= 0)
