@@ -5,13 +5,29 @@ namespace SimpleValidation
 {
 	public class Validator<T>
 	{
-		internal T Value { get; private set; }
-		internal string Name { get; private set; }
+		private readonly Func<T> getValue;
+		private string name;
 
-		public Validator(T value, string name)
+		internal T Value { get; private set; }
+
+		internal string Name
+		{
+			get
+			{
+				return name ?? (name = getValue.Target.GetType().GetFields()[0].Name);
+			}
+		}
+		
+		public Validator(Func<T> getValue)
+		{
+			Value = getValue();
+			this.getValue = getValue;
+		}
+
+		public Validator(T value)
 		{
 			Value = value;
-			Name = name;
+			name = "<Constant>";
 		}
 	}
 
